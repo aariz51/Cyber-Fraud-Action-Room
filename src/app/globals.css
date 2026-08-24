@@ -38,8 +38,8 @@
   /* Warm neutral base. One palette, no cool/warm drift. */
   --ink: #1c1917;
   --ink-2: #44403c;
-  --ink-3: #78716c;
-  --ink-4: #a8a29e;
+  --ink-3: #6b645f;   /* 5.81:1 on panel */
+  --ink-4: #736c67;   /* 5.16:1 on panel, 4.62:1 on surface-3 */
 
   --surface: #faf9f7;
   --surface-2: #ffffff;
@@ -58,9 +58,9 @@
   /* Semantic scale. Clock and status only. */
   --ok: #047857;      /* 5.48:1 on white */
   --ok-soft: #e6f4ee;
-  --warn: #a16207;    /* 4.92:1 on white */
+  --warn: #8f5706;    /* 5.26:1 worst case, incl. on warn-soft */
   --warn-soft: #fbf0dc;
-  --crit: #dc2626;    /* 4.83:1 on white */
+  --crit: #c81e1e;    /* 4.90:1 worst case, incl. on crit-soft */
   --crit-soft: #fbe9e9;
 
   --focus: #0f5e57;
@@ -71,8 +71,8 @@
   :root:not([data-theme="light"]) {
     --ink: #f5f3f1;
     --ink-2: #d6d2cd;
-    --ink-3: #a8a29e;
-    --ink-4: #78716c;
+    --ink-3: #a8a29e;   /* 6.66:1 on panel */
+    --ink-4: #958d87;   /* 5.15:1 on panel, 4.78:1 on surface-3 */
 
     --surface: #171514;
     --surface-2: #1f1d1b;
@@ -102,8 +102,8 @@
 :root[data-theme="dark"] {
   --ink: #f5f3f1;
   --ink-2: #d6d2cd;
-  --ink-3: #a8a29e;
-  --ink-4: #78716c;
+  --ink-3: #a8a29e;   /* 6.66:1 on panel */
+  --ink-4: #958d87;   /* 5.15:1 on panel, 4.78:1 on surface-3 */
 
   --surface: #171514;
   --surface-2: #1f1d1b;
