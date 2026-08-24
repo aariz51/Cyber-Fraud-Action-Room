@@ -24,17 +24,13 @@ import { CaretDown, CheckCircle, Circle, ArrowRight } from "@phosphor-icons/reac
 export default function CasePage() {
   const router = useRouter();
   const { kase, ready, elapsedMin, toggleAction, update } = useCase();
-  const [open, setOpen] = useState<ActionId | null>(null);
+  // The first action is the highest-value one, so it starts open.
+  const [open, setOpen] = useState<ActionId | null>("call1930");
 
   // Send anyone without a case back to triage.
   useEffect(() => {
     if (ready && !kase) router.replace("/act");
   }, [ready, kase, router]);
-
-  // Open the highest-value action by default.
-  useEffect(() => {
-    if (kase && open === null) setOpen("call1930");
-  }, [kase, open]);
 
   if (!ready || !kase) {
     return (

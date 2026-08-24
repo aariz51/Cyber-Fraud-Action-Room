@@ -1,8 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Info, X } from "@phosphor-icons/react";
+
+/** sessionStorage is external mutable state, so read it as such. */
+const dismissListeners = new Set<() => void>();
+let dismissedSnapshot = false;
+let dismissRead = false;
+
+function subscribeDismiss(cb: () => void) {
+  if (!dismissRead) {
+    dismissRead = true;
+    try {
+      dismissedSnapshot = sessionStorage.getItem("gh-banner") === "hidden";
+    } catch {
+      dismissedSnapshot = false;
+    }
+  }
+  dismissListeners.add(cb);
+  return () => {
+    dismissListeners.delete(cb);
+  };
+}
 
 /**
  * Persistent honesty banner. "Honesty" is a judging criterion for this
@@ -10,19 +30,23 @@ import { Info, X } from "@phosphor-icons/react";
  * service must never be mistaken for one. This stays on every route.
  */
 export function PrototypeBanner() {
-  const [dismissed, setDismissed] = useState(false);
-  const [ready, setReady] = useState(false);
+  const dismissed = useSyncExternalStore(
+    subscribeDismiss,
+    () => dismissedSnapshot,
+    () => true // hidden during SSR, so the banner never flashes before hydration
+  );
 
-  useEffect(() => {
+  const dismiss = useCallback(() => {
+    dismissedSnapshot = true;
     try {
-      setDismissed(sessionStorage.getItem("gh-banner") === "hidden");
+      sessionStorage.setItem("gh-banner", "hidden");
     } catch {
-      /* private mode, keep showing */
+      /* private mode, dismissal just does not persist */
     }
-    setReady(true);
+    for (const l of dismissListeners) l();
   }, []);
 
-  if (!ready || dismissed) return null;
+  if (dismissed) return null;
 
   return (
     <div
@@ -52,14 +76,7 @@ export function PrototypeBanner() {
         <button
           type="button"
           aria-label="Hide this notice for this session"
-          onClick={() => {
-            setDismissed(true);
-            try {
-              sessionStorage.setItem("gh-banner", "hidden");
-            } catch {
-              /* ignore */
-            }
-          }}
+          onClick={dismiss}
           className="btn btn-ghost ml-auto shrink-0 !p-1.5"
         >
           <X size={14} />
