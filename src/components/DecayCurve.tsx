@@ -19,8 +19,8 @@ import { ANCHORS, freezeProbability, humanElapsed } from "@/lib/recovery";
  */
 
 const W = 640;
-const H = 210;
-const PAD = { t: 16, r: 16, b: 30, l: 38 };
+const H = 230;
+const PAD = { t: 16, r: 14, b: 36, l: 44 };
 const T_MAX = 43200; // 30 days in minutes
 const Y_MAX = 0.72;
 
@@ -166,9 +166,9 @@ export function DecayCurve({
             />
             <text
               x={PAD.l - 8}
-              y={sy(p) + 3.5}
+              y={sy(p) + 4.5}
               textAnchor="end"
-              fontSize="10"
+              fontSize="13"
               fill="var(--ink-4)"
               className="num"
             >
@@ -205,9 +205,9 @@ export function DecayCurve({
           <text
             key={tk.t}
             x={sx(tk.t)}
-            y={H - PAD.b + 15}
+            y={H - PAD.b + 18}
             textAnchor={tk.t === T_MAX ? "end" : tk.t === 5 ? "start" : "middle"}
-            fontSize="10"
+            fontSize="13"
             fill="var(--ink-4)"
           >
             {tk.label}

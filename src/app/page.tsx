@@ -19,10 +19,10 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-4 pt-14 pb-16 sm:pt-20">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">
-              <h1 className="text-[34px] font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[52px]">
+              <h1 className="text-[34px] font-semibold leading-[1.06] tracking-tight sm:text-[42px] lg:text-[46px]">
                 The first hour decides
                 <br />
-                whether you get your money back.
+                if you get your money back.
               </h1>
               <p
                 className="mt-5 max-w-[46ch] text-[17px] leading-relaxed"

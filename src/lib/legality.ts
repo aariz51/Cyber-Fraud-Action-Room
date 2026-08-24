@@ -359,7 +359,7 @@ export function bankLetter(facts: FreezeFacts, result: LegalityResult): string {
       : `the basis for reliance on section ${facts.section} of the BNSS, 2023`;
 
   const proportion = result.disproportionateAmount
-    ? `\n4. My account held ${inr(facts.balanceHeld)} at the time of the freeze, while the disputed credit is ${inr(facts.disputedAmount)}. I request immediate release of ${inr(result.disproportionateAmount)}, being the balance unconnected to any alleged offence. The Madras High Court in W.P. No. 25631 of 2024 has held that only the amount connected to the alleged offence may be placed under lien.\n`
+    ? `\n4. My account held ${inr(facts.balanceHeld)} at the time of the freeze, while the disputed credit is ${inr(facts.disputedAmount)}. I request immediate release of ${inr(result.disproportionateAmount)}, being the balance unconnected to any alleged offence. The Madras High Court in W.P. No. 25631 of 2024 has held that only the amount connected to the alleged offence may be placed under lien.`
     : "";
 
   return `To
