@@ -43,3 +43,12 @@ next-env.d.ts
 # local agent scratch
 AGENTS.md
 .playwright-mcp/
+
+# video working files (large binaries)
+video/.work/
+video/.rawvideo/
+video/segments/
+video/reference*.wav
+video/vo/
+video/samples/
+video/node_modules
