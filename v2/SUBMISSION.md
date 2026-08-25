@@ -4,31 +4,34 @@ Deadline: 28 August 2026, 8:00 PM IST. No grace period.
 
 ---
 
-## Project summary (238 words, limit is 250)
+## Project summary
 
 In Indian cyber fraud the outcome is decided in the first hour. Published figures
-put the chance of successfully freezing stolen money at over 60% within minutes,
-25 to 40% within 24 hours, and 5 to 10% after seven days. Nothing in the current
-reporting experience tells a victim this, and nothing shows them the clock. They
-are handed a long form, then an acknowledgement number, then silence.
+put the chance of freezing stolen money at over 60% within minutes, 25 to 40%
+within 24 hours, and 5 to 10% after seven days. Nothing in the reporting
+experience tells a victim this, or shows them the clock. They get a long form, an
+acknowledgement number, then silence.
 
-Golden Hour replaces the form-first flow with a triage-first one. Four questions,
-then a live Recovery Clock showing the odds now and what each next action buys. A
-Layer Map shows the money fanning out through mule accounts in real time, which is
-what makes speed mean something rather than being advice nobody acts on. Actions
-are ordered by how much money they recover, so calling 1930 leads, with a script
-in Hindi or English because people go blank on the phone.
+Golden Hour is one door into a focused workspace. Four questions build a local
+case, then a live Recovery Clock shows the odds now and what each next action
+buys. Every job gets its own page: urgent actions, money trail, evidence locker,
+complaint draft, recovery tracker.
+
+Actions are ordered by how much money each recovers, so calling 1930 leads, with
+a script in Hindi or English because people go blank on the phone. The Money Trail
+shows funds fanning out through intermediary accounts, which is what makes speed
+mean something.
 
 One triage question decides which protection applies. If the transaction was
 unauthorised, the RBI circular gives zero liability when the bank is told within
-three working days. If the victim was deceived into authorising it, that rule does
-not apply and speed is the only lever. Almost nobody knows which case they are in.
+three working days. If the victim was deceived into authorising it, that rule
+does not apply and speed is the only lever. Few people know which they are in.
 
-A second journey serves the other victim of the same money trail: people whose own
-account was frozen because they received one tainted rupee. Five questions produce
-a legal position with real citations, a bank letter and an RTI draft.
+A second path serves the other victim of the same trail: people whose account was
+frozen over one tainted rupee. Five questions produce a legal position with real
+citations, a bank letter and an RTI draft.
 
-Synthetic data throughout. Independent prototype.
+Synthetic data throughout.
 
 ---
 
