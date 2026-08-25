@@ -97,18 +97,28 @@ that should exist around it."
 - [ ] Confirm every demoed feature works
 - [ ] Confirm no real Aadhaar, PAN, OTP, card or payment data anywhere
 
-## Open item for the builder
+## How the OpenAI requirement is satisfied
 
-The rules say the prototype should be built with Codex **or** powered by an OpenAI
-model, and that the submission should explain how Codex contributed. This build
-was written with Claude Code, so the "built with Codex" half is not satisfied as
-it stands. Two ways to close that honestly:
+The rule is an **or**: the prototype should be built with Codex **or** powered by
+an OpenAI model, and the submission should explain how Codex contributed.
 
-1. **Set `OPENAI_API_KEY`** so the drafting step is genuinely powered by an OpenAI
-   model at runtime. That satisfies the "powered by an OpenAI model" branch, and
-   the app is already wired for it.
-2. **Do a real pass with Codex** over this repo before submitting, and describe
-   that contribution accurately in the form.
+**The runtime path is already wired.** Set `OPENAI_API_KEY` in `.env.local` and
+the complaint-drafting step is genuinely powered by an OpenAI model. That is a
+real, verifiable claim you can make in the form:
 
-Do not claim Codex involvement that did not happen. Honesty is a judged criterion,
-and the rest of this project is built on it.
+> The complaint drafting step is powered by an OpenAI model. A victim has to turn
+> a confusing, upsetting hour into the factual chronology a police officer can act
+> on, which is the wrong task to hand someone in a panic. That is the one step
+> where the model earns its place. Everything else is deterministic, because
+> someone deciding what to do in the next ten minutes deserves the same answer
+> every time they ask. `src/app/api/draft/route.ts`
+
+Verify it before submitting: open the freeze-request step and generate a draft.
+The chip must read **"Written by an OpenAI model"**, not "Built-in template". If
+it says template, the key is not being read.
+
+**If you also run a Codex pass** over the repo before submitting, describe what it
+actually did in your own words here:
+
+> _[Describe your Codex contribution. Keep it accurate: judges score honesty, and
+> a claim that does not match the repo is worse than a smaller true one.]_
