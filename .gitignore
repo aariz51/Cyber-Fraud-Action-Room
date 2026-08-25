@@ -52,3 +52,10 @@ video/reference*.wav
 video/vo/
 video/samples/
 video/node_modules
+
+# v2 video working files
+v2/video/segments/
+v2/video/vo/
+v2/video/.rawvideo/
+v2/video/*.wav
+v2/video/.work/
