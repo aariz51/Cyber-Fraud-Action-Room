@@ -39,6 +39,9 @@ export function SiteHeader({ minimal = false }: { minimal?: boolean }) {
 
         {!minimal && (
           <nav className="ml-auto flex items-center gap-1 text-[13px]">
+            <Link href="/proposal" className="btn btn-ghost hidden !px-3 !py-2 lg:inline-flex">
+              The fix
+            </Link>
             <Link href="/methodology" className="btn btn-ghost hidden !px-3 !py-2 md:inline-flex">
               Methodology
             </Link>

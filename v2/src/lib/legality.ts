@@ -34,6 +34,40 @@ export interface Citation {
   scope: string;
 }
 
+/**
+ * How far the hold exceeds the dispute. Expressed as rupees locked per rupee
+ * actually in question, because that ratio is the argument: nobody has to
+ * understand BNSS to see that 10,629 to 1 is not a proportionate measure.
+ */
+export interface Proportionality {
+  /** rupees held for every rupee disputed */
+  lockedPerRupee: number;
+  /** the part of the balance with no stated connection to the case */
+  unconnected: number;
+  /** rupee-days: how much money has been immobilised, for how long */
+  rupeeDays: number;
+}
+
+/**
+ * One rung of the escalation ladder.
+ *
+ * Availability is gated on days since the freeze rather than shown all at once.
+ * A person told on day 2 to file a writ will do nothing; a person told on day 2
+ * to send one email, and told the exact date the ombudsman becomes available,
+ * acts twice.
+ */
+export interface FreezeStep {
+  id: string;
+  title: string;
+  body: string;
+  /** day, counted from the freeze, on which this becomes available */
+  availableFrom: number;
+  available: boolean;
+  /** what makes it available, or what it is waiting for */
+  gate: string;
+  cost: string;
+}
+
 export interface LegalityResult {
   strength: Strength;
   headline: string;
@@ -43,6 +77,8 @@ export interface LegalityResult {
   jurisdiction: { court: string; posture: string };
   actions: { title: string; body: string }[];
   disproportionateAmount: number | null;
+  proportionality: Proportionality | null;
+  ladder: FreezeStep[];
 }
 
 /* ------------------------------------------------------------------ */
@@ -345,7 +381,106 @@ export function assessFreeze(facts: FreezeFacts): LegalityResult {
     jurisdiction: { court: jx.court, posture: jx.posture },
     actions,
     disproportionateAmount,
+    proportionality: proportionalityOf(facts),
+    ladder: ladderFor(facts, strength),
   };
+}
+
+/* ------------------------------------------------------------------ */
+/* Proportionality                                                     */
+/* ------------------------------------------------------------------ */
+
+function proportionalityOf(facts: FreezeFacts): Proportionality | null {
+  if (facts.scope !== "whole") return null;
+  if (facts.disputedAmount <= 0 || facts.balanceHeld <= facts.disputedAmount) return null;
+
+  return {
+    lockedPerRupee: facts.balanceHeld / facts.disputedAmount,
+    unconnected: facts.balanceHeld - facts.disputedAmount,
+    rupeeDays: facts.balanceHeld * Math.max(facts.daysSinceFreeze, 0),
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* The escalation ladder                                               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Day thresholds are not invented. The seven working days on the bank demand is
+ * the period the letter itself specifies. The thirty days on the Ombudsman is
+ * the RBI Integrated Ombudsman Scheme 2021 rule that a complaint is admissible
+ * only after the bank has had thirty days and has not resolved it. The rest are
+ * points at which a court is realistically approachable, and are labelled as
+ * judgement rather than as rules.
+ */
+function ladderFor(facts: FreezeFacts, strength: Strength): FreezeStep[] {
+  const d = Math.max(facts.daysSinceFreeze, 0);
+
+  const steps: FreezeStep[] = [
+    {
+      id: "bank-demand",
+      title: "Written demand to the bank",
+      body:
+        "One email to the branch and the nodal officer asking for the freeze notice, the section relied on, the disputed amount and the Magistrate report. This is the step that resolves most cases, because the bank often cannot produce the notice.",
+      availableFrom: 0,
+      available: true,
+      gate: "Available immediately. Send it today.",
+      cost: "Free",
+    },
+    {
+      id: "rti",
+      title: "RTI to the district police",
+      body:
+        "Ten rupees, one question: is any case registered against you in that district. A reply saying no is the single most effective document for getting a freeze lifted, because it separates you from the accused.",
+      availableFrom: 0,
+      available: true,
+      gate: "Available immediately, and it runs in parallel with the bank demand.",
+      cost: "Rs 10",
+    },
+    {
+      id: "magistrate",
+      title: "Application to the jurisdictional Magistrate",
+      body:
+        "Section 106(3) puts the seizure under the Magistrate's supervision. If the bank cannot show that report, an application asking the Magistrate to either confirm or release is the direct route, and it does not need a writ.",
+      availableFrom: 15,
+      available: d >= 15,
+      gate:
+        d >= 15
+          ? "Available. The bank has had a reasonable period to answer."
+          : `Opens on day 15, which is ${15 - d} day${15 - d === 1 ? "" : "s"} away. Send the written demand first so you can show it went unanswered.`,
+      cost: "Court fee, usually nominal",
+    },
+    {
+      id: "ombudsman",
+      title: "RBI Banking Ombudsman",
+      body:
+        "The Integrated Ombudsman Scheme covers a bank's failure to act on your representation. Filing is free and online, and the bank has to respond on record.",
+      availableFrom: 30,
+      available: d >= 30,
+      gate:
+        d >= 30
+          ? "Available. The scheme requires the bank to have had 30 days first, and it has."
+          : `Opens on day 30, which is ${30 - d} day${30 - d === 1 ? "" : "s"} away. The scheme will reject a complaint filed before the bank has had 30 days.`,
+      cost: "Free",
+    },
+    {
+      id: "writ",
+      title: "Writ petition in the High Court",
+      body:
+        strength === "strong"
+          ? "Account holders have obtained relief by writ where the freeze was disproportionate or never reported to a Magistrate. On the facts you gave, this is a real option rather than a threat."
+          : "Available in principle, but only worth the cost once the written record shows the bank and the police were asked and did not answer.",
+      availableFrom: 60,
+      available: d >= 60,
+      gate:
+        d >= 60
+          ? "Available. An indefinite hold with no judicial review is what these petitions are for."
+          : `Realistically worth considering from day 60, which is ${60 - d} day${60 - d === 1 ? "" : "s"} away. Build the paper trail until then.`,
+      cost: "Lawyer's fees",
+    },
+  ];
+
+  return steps;
 }
 
 /* ------------------------------------------------------------------ */

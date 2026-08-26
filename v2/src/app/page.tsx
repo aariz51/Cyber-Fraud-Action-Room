@@ -13,8 +13,8 @@ import {
 import { SiteHeader } from "@/components/SiteHeader";
 
 const MODULES = [
-  { icon: ClockCountdown, eyebrow: "Emergency path", title: "Money just moved", body: "Four questions, then a live clock and one prioritised action at a time.", href: "/action-room/intake", cta: "Start triage" },
-  { icon: Snowflake, eyebrow: "The other victim", title: "My account is frozen", body: "One tainted rupee can lock an entire balance for months. Test whether that freeze is even lawful.", href: "/action-room/frozen", cta: "Check the freeze" },
+  { icon: Snowflake, eyebrow: "The victim nobody builds for", title: "My account is frozen", body: "You received a payment. It turned out to be tainted. Now your whole balance is locked and no portal has a door for you. Test whether that freeze is even lawful.", href: "/action-room/frozen", cta: "Check the freeze" },
+  { icon: ClockCountdown, eyebrow: "Emergency path", title: "Money just left my account", body: "Four questions, then a live clock and one prioritised action at a time.", href: "/action-room/intake", cta: "Start triage" },
   { icon: FolderOpen, eyebrow: "Prepared response", title: "I need to organise my case", body: "Preserve evidence, build a chronology, and track every follow-up.", href: "/action-room", cta: "Open workspace" },
 ] as const;
 
@@ -25,17 +25,21 @@ export default function Home() {
       <main>
         <section className="mx-auto grid max-w-7xl gap-12 px-4 pb-20 pt-14 sm:px-6 sm:pt-20 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-28">
           <div className="lg:col-span-6">
-            <p className="eyebrow">Independent OpenAI hackathon prototype</p>
-            <h1 className="display mt-5 max-w-[10ch] text-[3.7rem] leading-[0.94] sm:text-[5.2rem] lg:text-[6.2rem]">Know what to do next.</h1>
+            <p className="eyebrow">Independent prototype &middot; powered by an OpenAI model</p>
+            <h1 className="display mt-5 max-w-[13ch] text-[3.3rem] leading-[0.94] sm:text-[4.6rem] lg:text-[5.4rem]">Every fraud has two victims.</h1>
             <p className="mt-7 max-w-[39rem] text-[1.02rem] leading-8 text-[var(--ink-2)] sm:text-[1.12rem]">
-              Recovery odds fall from sixty percent to five within a week. Golden Hour
-              shows you that clock, and works for both people the same fraud hits: the one
-              who was robbed, and the one whose account is frozen because the money passed
-              through it.
+              One is robbed. The other received the money, had no idea it was stolen, and
+              wakes up to an entire balance frozen over a disputed few hundred rupees. The
+              first has a helpline. The second is not a category any portal recognises, so
+              they get no door at all.
+            </p>
+            <p className="mt-4 max-w-[39rem] text-[1.02rem] leading-8 text-[var(--ink-2)] sm:text-[1.12rem]">
+              Golden Hour works the first hour for one and the freeze for the other, and
+              names the four missing fields that cause both.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/action-room" className="btn btn-primary px-5 py-3.5 text-sm">Enter Action Room <ArrowRight size={17} weight="bold" /></Link>
-              <a href="tel:1930" className="btn btn-emergency px-5 py-3.5 text-sm"><PhoneCall size={17} weight="fill" />Call 1930</a>
+              <Link href="/action-room/frozen" className="btn btn-primary px-5 py-3.5 text-sm">My account is frozen <ArrowRight size={17} weight="bold" /></Link>
+              <a href="tel:1930" className="btn btn-emergency px-5 py-3.5 text-sm"><PhoneCall size={17} weight="fill" />Money just moved &mdash; call 1930</a>
             </div>
             <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-[0.74rem] font-semibold text-[var(--ink-3)]">
               <span>NO SIGN-UP</span><span>DEVICE-LOCAL CASE</span><span>ENGLISH + हिंदी</span><span>DEMO DATA</span>
@@ -90,8 +94,8 @@ export default function Home() {
 
         <section className="bg-[#101416] px-4 py-16 text-[#f5f0e6] sm:px-6 sm:py-20">
           <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row md:items-end">
-            <div><p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[#e9a23b]">Prototype boundary</p><h2 className="display mt-3 max-w-[12ch] text-[3rem] leading-none sm:text-[4rem]">Real workflow. Synthetic case data.</h2><p className="mt-5 max-w-[43rem] text-sm leading-7 text-[#b9b6af]">Golden Hour does not connect to a bank, police system, NCRP, or CFCFRMS. It preserves local state, makes the next action visible, and clearly labels every simulated step.</p></div>
-            <div className="flex shrink-0 flex-col gap-3 sm:flex-row"><Link href="/methodology" className="btn border border-[#424a4d] bg-[#171c1e] px-5 py-3 text-sm text-[#f5f0e6]">Review sources</Link><Link href="/action-room" className="btn bg-[#e9a23b] px-5 py-3 text-sm text-[#111416]">Enter Action Room <ArrowRight size={17} weight="bold" /></Link></div>
+            <div><p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[#e9a23b]">The part a redesign cannot fix</p><h2 className="display mt-3 max-w-[12ch] text-[3rem] leading-none sm:text-[4rem]">Four fields, not a new system.</h2><p className="mt-5 max-w-[43rem] text-sm leading-7 text-[#b9b6af]">The freeze instruction that reaches a bank does not carry the disputed amount, so the bank freezes everything, because that is the safe default. We wrote out the four additive fields that would end it, and what they would cost to add. Golden Hour does not connect to a bank, police system, NCRP or CFCFRMS, and every simulated step is labelled.</p></div>
+            <div className="flex shrink-0 flex-col gap-3 sm:flex-row"><Link href="/methodology" className="btn border border-[#424a4d] bg-[#171c1e] px-5 py-3 text-sm text-[#f5f0e6]">Sources</Link><Link href="/proposal" className="btn bg-[#e9a23b] px-5 py-3 text-sm text-[#111416]">Read the fix <ArrowRight size={17} weight="bold" /></Link></div>
           </div>
         </section>
       </main>

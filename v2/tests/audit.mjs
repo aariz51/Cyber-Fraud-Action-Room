@@ -22,6 +22,7 @@ const check = (name, ok, detail = '') => {
 const ROUTES = [
   '/',
   '/methodology',
+  '/proposal',
   '/action-room',
   '/action-room/intake',
   '/action-room/what-to-do',

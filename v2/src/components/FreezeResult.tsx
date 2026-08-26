@@ -13,6 +13,7 @@ import {
   Copy,
   Check,
   Gavel,
+  Lock,
   Scales,
   Printer,
   Warning,
@@ -70,24 +71,33 @@ export function FreezeResult({
           {result.summary}
         </p>
 
-        {result.disproportionateAmount !== null && result.disproportionateAmount > 0 && (
+        {result.proportionality && (
           <div
             className="mt-5 rounded-[10px] p-4"
             style={{ background: "var(--warn-soft)" }}
           >
             <p className="text-[13px] font-medium" style={{ color: "var(--warn)" }}>
-              Held with no stated connection to the case
+              Locked for every rupee actually in dispute
             </p>
             <p
-              className="num mt-1 text-[30px] font-semibold leading-none"
+              className="num mt-1 text-[38px] font-semibold leading-none"
               style={{ color: "var(--warn)" }}
             >
-              {formatINR(result.disproportionateAmount)}
+              &#8377;{Math.round(result.proportionality.lockedPerRupee).toLocaleString("en-IN")}
+              <span className="ml-1 text-[16px] font-medium">: 1</span>
             </p>
-            <p className="mt-2 text-[13.5px] leading-snug" style={{ color: "var(--ink-2)" }}>
-              Your balance is {formatINR(facts.balanceHeld)} and the disputed sum is{" "}
-              {formatINR(facts.disputedAmount)}. Ask for this difference back now,
-              separately from the rest of the dispute.
+            <p className="mt-2.5 text-[13.5px] leading-relaxed" style={{ color: "var(--ink-2)" }}>
+              {formatINR(facts.balanceHeld)} is held. {formatINR(facts.disputedAmount)} is
+              disputed. That leaves{" "}
+              <strong style={{ color: "var(--ink)" }}>
+                {formatINR(result.proportionality.unconnected)}
+              </strong>{" "}
+              with no stated connection to the case, immobilised for{" "}
+              {facts.daysSinceFreeze} day{facts.daysSinceFreeze === 1 ? "" : "s"}.
+            </p>
+            <p className="mt-2 text-[12.5px] leading-relaxed" style={{ color: "var(--ink-3)" }}>
+              This ratio is the whole argument. Ask for the unconnected amount back now,
+              separately from the dispute, rather than waiting for the case to end.
             </p>
           </div>
         )}
@@ -181,27 +191,57 @@ export function FreezeResult({
           </section>
 
           <section className="panel p-5 sm:p-6">
-            <h2 className="text-[15px] font-semibold tracking-tight">What to do</h2>
-            <ol className="mt-4 space-y-3.5">
-              {result.actions.map((a, i) => (
-                <li key={a.title} className="flex gap-3">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h2 className="text-[15px] font-semibold tracking-tight">What to do, in order</h2>
+              <p className="text-[12.5px]" style={{ color: "var(--ink-3)" }}>
+                Day {facts.daysSinceFreeze} of the freeze
+              </p>
+            </div>
+            <p className="mt-2 text-[13.5px] leading-relaxed" style={{ color: "var(--ink-2)" }}>
+              Steps unlock by day, because filing before a route is admissible gets the
+              complaint rejected and wastes the strongest weeks.
+            </p>
+
+            <ol className="mt-4 space-y-0">
+              {result.ladder.map((s, i) => (
+                <li
+                  key={s.id}
+                  className="grid grid-cols-[auto_1fr] gap-x-3 py-4"
+                  style={i > 0 ? { borderTop: "1px solid var(--line)" } : undefined}
+                >
                   <span
                     className="num mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold"
-                    style={{ background: "var(--surface-3)", color: "var(--ink-2)" }}
+                    style={
+                      s.available
+                        ? { background: "var(--accent-soft)", color: "var(--accent)" }
+                        : { background: "var(--surface-3)", color: "var(--ink-3)" }
+                    }
                   >
-                    {i + 1}
+                    {s.available ? i + 1 : <Lock size={11} weight="bold" />}
                   </span>
-                  <span>
-                    <span className="block text-[14.5px] font-medium leading-snug">
-                      {a.title}
-                    </span>
-                    <span
-                      className="mt-0.5 block text-[13.5px] leading-relaxed"
+                  <div style={s.available ? undefined : { opacity: 0.66 }}>
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <h3 className="text-[14.5px] font-medium leading-snug">{s.title}</h3>
+                      <span
+                        className="chip !px-1.5 !py-0.5 !text-[10.5px]"
+                        style={{ background: "var(--surface-3)", color: "var(--ink-3)" }}
+                      >
+                        {s.cost}
+                      </span>
+                    </div>
+                    <p
+                      className="mt-1 text-[13.5px] leading-relaxed"
                       style={{ color: "var(--ink-2)" }}
                     >
-                      {a.body}
-                    </span>
-                  </span>
+                      {s.body}
+                    </p>
+                    <p
+                      className="mt-1.5 text-[12.5px] leading-relaxed"
+                      style={{ color: s.available ? "var(--ok)" : "var(--ink-3)" }}
+                    >
+                      {s.gate}
+                    </p>
+                  </div>
                 </li>
               ))}
             </ol>

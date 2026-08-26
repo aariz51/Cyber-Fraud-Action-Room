@@ -42,11 +42,11 @@ export const metadata: Metadata = {
     template: "%s — Golden Hour",
   },
   description:
-    "A calm, private command room for the first hours after cyber fraud in India. Triage the incident, preserve evidence, draft a complaint, and track the response.",
+    "Every cyber fraud has two victims: the one who was robbed, and the one whose account is frozen because the money passed through it. Golden Hour works both, and names the four missing fields that cause them.",
   openGraph: {
     title: "Golden Hour — Cyber Fraud Action Room",
     description:
-      "Know what to do next after cyber fraud. A private, device-local hackathon prototype.",
+      "Every cyber fraud has two victims. The second one has no door. A private, device-local hackathon prototype.",
     images: [{ url: "/assets/golden-hour-north-star.png", width: 1536, height: 1024 }],
   },
   twitter: {
