@@ -13,8 +13,8 @@ import {
 import { SiteHeader } from "@/components/SiteHeader";
 
 const MODULES = [
-  { icon: ClockCountdown, eyebrow: "Emergency path", title: "Money just moved", body: "Answer four questions, then get one prioritized action at a time.", href: "/action-room/intake", cta: "Start triage" },
-  { icon: Snowflake, eyebrow: "Account restraint", title: "My account is frozen", body: "Test the scope, notice, section, and escalation position separately.", href: "/action-room/frozen", cta: "Check the freeze" },
+  { icon: ClockCountdown, eyebrow: "Emergency path", title: "Money just moved", body: "Four questions, then a live clock and one prioritised action at a time.", href: "/action-room/intake", cta: "Start triage" },
+  { icon: Snowflake, eyebrow: "The other victim", title: "My account is frozen", body: "One tainted rupee can lock an entire balance for months. Test whether that freeze is even lawful.", href: "/action-room/frozen", cta: "Check the freeze" },
   { icon: FolderOpen, eyebrow: "Prepared response", title: "I need to organise my case", body: "Preserve evidence, build a chronology, and track every follow-up.", href: "/action-room", cta: "Open workspace" },
 ] as const;
 
@@ -28,8 +28,10 @@ export default function Home() {
             <p className="eyebrow">Independent OpenAI hackathon prototype</p>
             <h1 className="display mt-5 max-w-[10ch] text-[3.7rem] leading-[0.94] sm:text-[5.2rem] lg:text-[6.2rem]">Know what to do next.</h1>
             <p className="mt-7 max-w-[39rem] text-[1.02rem] leading-8 text-[var(--ink-2)] sm:text-[1.12rem]">
-              Golden Hour turns the first confusing hours after cyber fraud into a calm,
-              private sequence of actions—without making you read an entire website first.
+              Recovery odds fall from sixty percent to five within a week. Golden Hour
+              shows you that clock, and works for both people the same fraud hits: the one
+              who was robbed, and the one whose account is frozen because the money passed
+              through it.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/action-room" className="btn btn-primary px-5 py-3.5 text-sm">Enter Action Room <ArrowRight size={17} weight="bold" /></Link>
