@@ -15,6 +15,42 @@ import { SiteHeader } from "@/components/SiteHeader";
  * requires a new platform, a new identity system, or an amendment to the BNSS.
  */
 
+
+const MODEL_ROLES = [
+  {
+    job: "Turning a panicking narrative into a chronology an officer can act on",
+    model: "gpt-4.1-mini",
+    status: "shipped" as const,
+    today:
+      "Live in the product now. One call, one job. It is never allowed to invent an identifier, decide legal entitlement, rewrite authorisation status or reorder the urgent actions, and the draft is labelled with which path produced it.",
+    cost: "about 10 paise per complaint",
+  },
+  {
+    job: "Hearing the story instead of making them type it",
+    model: "gpt-4o-transcribe",
+    status: "would-raise" as const,
+    today:
+      "A person in the first hour after losing money is shaking. Typing a 200 character description is the wrong input method for that moment, and the narrative that arrives is code-mixed Hinglish, which keyword matching cannot survive.",
+    cost: "about 30 paise per complaint",
+  },
+  {
+    job: "Reading the freeze verdict aloud",
+    model: "gpt-4o-mini-tts",
+    status: "would-raise" as const,
+    today:
+      "The browser speech engine is free and works offline, which is why it is what ships. On the cheap Android handsets that matter most here, it reads Devanagari with a Latin voice and the Hindi comes out as nonsense.",
+    cost: "about 2 rupees per verdict",
+  },
+  {
+    job: "The legal explanations in more Indian languages",
+    model: "gpt-5-mini, generated once at build time",
+    status: "would-raise" as const,
+    today:
+      "English and Hindi are complete, including the generated letters. Six further languages are named as pending rather than shipped unverified. A confidently wrong sentence about section 106 BNSS is worse than no sentence, and we cannot read Tamil or Kannada well enough to check one. Generated at build time, runtime cost is zero and it cannot fail on a bad connection.",
+    cost: "single digit rupees, once",
+  },
+] as const;
+
 const CHANGES = [
   {
     n: "01",
@@ -179,6 +215,48 @@ export default function ProposalPage() {
               proportionality at all.
             </p>
           </div>
+        </section>
+
+        <section className="mt-16">
+          <p className="eyebrow">The model</p>
+          <h2 className="display mt-3 text-[2.6rem] leading-none sm:text-[3.2rem]">What it does today, and what it would raise.</h2>
+          <p className="mt-5 max-w-[46rem] text-base leading-8 text-[var(--ink-2)]">
+            One OpenAI model is load-bearing in this product right now. Three more would
+            each remove a real limitation, and it is more useful to name them with their
+            cost than to claim the prototype has no ceiling.
+          </p>
+          <div className="mt-8 overflow-x-auto rounded-[1.4rem] border border-[var(--line)]">
+            <table className="w-full min-w-[46rem] border-collapse text-left">
+              <thead>
+                <tr className="bg-[var(--surface-2)]">
+                  <th className="p-4 text-[0.7rem] font-bold uppercase tracking-[0.09em] text-[var(--ink-3)]">Job</th>
+                  <th className="p-4 text-[0.7rem] font-bold uppercase tracking-[0.09em] text-[var(--ink-3)]">Model</th>
+                  <th className="p-4 text-[0.7rem] font-bold uppercase tracking-[0.09em] text-[var(--ink-3)]">Where it stands</th>
+                  <th className="p-4 text-[0.7rem] font-bold uppercase tracking-[0.09em] text-[var(--ink-3)]">Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                {MODEL_ROLES.map((r) => (
+                  <tr key={r.job} className="border-t border-[var(--line)] align-top">
+                    <td className="p-4 text-[0.84rem] font-semibold leading-6">{r.job}</td>
+                    <td className="p-4">
+                      <span className="num text-[0.78rem] font-bold">{r.model}</span>
+                      <span className="chip mt-2 block w-fit !px-2 !py-0.5 !text-[0.6rem]" style={{ background: r.status === "shipped" ? "var(--ok-soft)" : "var(--surface-3)", color: r.status === "shipped" ? "var(--ok)" : "var(--ink-3)" }}>
+                        {r.status === "shipped" ? "live now" : "would raise the ceiling"}
+                      </span>
+                    </td>
+                    <td className="p-4 text-[0.8rem] leading-6 text-[var(--ink-2)]">{r.today}</td>
+                    <td className="num p-4 text-[0.76rem] leading-6 text-[var(--ink-3)]">{r.cost}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 max-w-[46rem] text-[0.78rem] leading-6 text-[var(--ink-4)]">
+            Costs are order-of-magnitude estimates from published token pricing, not measured
+            invoices. They are here because a proposal that ignores what it costs to run is
+            not a proposal.
+          </p>
         </section>
 
         <div className="mt-14 flex flex-col gap-3 sm:flex-row">
