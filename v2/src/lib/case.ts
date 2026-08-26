@@ -227,7 +227,7 @@ export const STAGES: Stage[] = [
     typical: "Months",
     slaHours: null,
     detail:
-      "Frozen money is not automatically yours again. It generally takes an order before the bank releases it back to you. This is the stage people do not expect.",
+      "Frozen money is not automatically yours again. It generally takes an order before the bank releases it back to you, and this is the stage almost nobody expects. Published figures put the gap starkly: of roughly Rs 52,969 crore reported stolen, about Rs 7,647 crore was frozen, and only about Rs 167 crore had actually reached victims. Freezing is necessary. It is not the same as getting paid.",
   },
 ];
 
@@ -323,7 +323,7 @@ export const STATUTORY: StatutoryDeadline[] = [
     day: 14,
     title: "Preliminary enquiry should have become an FIR",
     what:
-      "Where police open a preliminary enquiry instead of registering an FIR, it is meant to be concluded within fourteen days, and an FIR registered if a cognizable offence appears. An enquiry is not allowed to run indefinitely.",
+      "Where police open a preliminary enquiry instead of registering an FIR, it is meant to be concluded within fourteen days, and an FIR registered if a cognizable offence appears. An enquiry is not allowed to run indefinitely. This deadline matters because the conversion is rare: reported figures put the share of cybercrime complaints becoming an FIR at around 1.4% in 2025, down from roughly 5% in 2022.",
     authority:
       "Section 173(3) BNSS 2023, read with Lalita Kumari v. Government of Uttar Pradesh (2014)",
     ifMissed:

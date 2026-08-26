@@ -3,6 +3,8 @@ import { ArrowRight, CheckCircle, XCircle } from "@phosphor-icons/react/dist/ssr
 import { SiteHeader } from "@/components/SiteHeader";
 
 const REAL = [
+  "Freezing money is not the same as returning it. Reported national figures put roughly Rs 52,969 crore as the amount complained about, about Rs 7,647 crore frozen, and only about Rs 167 crore actually restored to victims. The recovery tracker says so at the restoration stage rather than implying a freeze ends the story.",
+  "The share of cybercrime complaints that become an FIR is reported at around 1.4% in 2025, down from roughly 5% in 2022. That is why the fourteen day preliminary-enquiry deadline under section 173(3) BNSS is worth counting.",
   "1930 and cybercrime.gov.in are the official national reporting routes shown by the Ministry of Home Affairs.",
   "The difference between an unauthorised transaction and a payment made under deception changes which RBI customer-protection wording applies.",
   "For qualifying unauthorised third-party breaches, RBI’s circular includes zero liability when the customer notifies the bank within three working days and a shadow reversal within ten working days.",
