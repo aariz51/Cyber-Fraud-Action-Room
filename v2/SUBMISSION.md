@@ -1,5 +1,9 @@
 # Submission pack
 
+Live: **https://golden-hour-rust-mu.vercel.app**
+Repo: **github.com/aariz51/Cyber-Fraud-Action-Room**
+Demo video: **https://youtu.be/6FrDbfivus4** (unlisted, anyone with the link can watch)
+
 Deadline: 28 August 2026, 8:00 PM IST. No grace period.
 
 ---
@@ -93,8 +97,8 @@ that should exist around it."
 
 ## Submission checklist
 
-- [ ] Live public link that opens without requesting access
-- [ ] Video under two minutes, public link
+- [x] Live public link that opens without requesting access
+- [x] Video under two minutes, public link (1:37, https://youtu.be/6FrDbfivus4)
 - [ ] Summary under 250 words (above)
 - [ ] Partner's registered email, or blank if solo
 - [ ] Confirm every demoed feature works
