@@ -258,6 +258,12 @@ export const EVIDENCE: { id: string; label: string; note: string }[] = [
   { id: "number", label: "Phone numbers and UPI IDs used", note: "Copy them as text as well as a screenshot, so they can be searched." },
   { id: "profile", label: "Profile photo and display name", note: "Often the only identifying detail left after the account is deleted." },
   { id: "link", label: "Any link or app they sent", note: "Do not open it again. Long press and copy the address instead." },
+  // Screenshots are electronic records. Under the BSA an electronic record is
+  // admissible only with a certificate from the person who produced it, which is
+  // the successor to the old section 65B certificate. Almost nobody is told this,
+  // and it is the reason well-preserved evidence still gets excluded later.
+  { id: "statement", label: "Bank statement as a certified PDF", note: "Download the official PDF from the bank, not a screenshot of the app. A cropped screenshot is contested far more easily." },
+  { id: "s63", label: "A section 63 certificate for your screenshots", note: "Under section 63 of the Bharatiya Sakshya Adhiniyam 2023, an electronic record needs a signed certificate from whoever produced it to be admissible. Ask the police station for the format when you file." },
 ];
 
 /** 1930 call script, because people freeze up on the phone. */
@@ -279,3 +285,133 @@ export const CALL_SCRIPT: { en: string[]; hi: string[] } = {
     "Kripya mujhe is shikayat ka acknowledgement number dijiye.",
   ],
 };
+
+/* ------------------------------------------------------------------ */
+/* Statutory deadlines                                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The clock the citizen is never shown.
+ *
+ * The recovery-odds curve tells you how fast the money moves. This tells you how
+ * fast your *rights* expire, which is a different clock and a harder one to see.
+ * Each entry is a published rule with a date attached, not a rule of thumb.
+ */
+export interface StatutoryDeadline {
+  id: string;
+  day: number;
+  title: string;
+  what: string;
+  authority: string;
+  /** what to do the moment it passes, if nothing happened */
+  ifMissed: string;
+}
+
+export const STATUTORY: StatutoryDeadline[] = [
+  {
+    id: "rbi3",
+    day: 3,
+    title: "Zero-liability window closes",
+    what:
+      "For a genuinely unauthorised transaction, telling the bank within three working days puts the loss on the bank rather than on you. Past it, your liability starts climbing on a published scale.",
+    authority: "RBI circular RBI/2017-18/15, 6 July 2017",
+    ifMissed:
+      "Notify in writing anyway and record the date you first knew. The scale depends on when you were told, not when it happened.",
+  },
+  {
+    id: "pe14",
+    day: 14,
+    title: "Preliminary enquiry should have become an FIR",
+    what:
+      "Where police open a preliminary enquiry instead of registering an FIR, it is meant to be concluded within fourteen days, and an FIR registered if a cognizable offence appears. An enquiry is not allowed to run indefinitely.",
+    authority:
+      "Section 173(3) BNSS 2023, read with Lalita Kumari v. Government of Uttar Pradesh (2014)",
+    ifMissed:
+      "Apply in writing to the Superintendent of Police under section 173(4) BNSS. That application is itself a dated record.",
+  },
+  {
+    id: "omb30",
+    day: 30,
+    title: "Banking Ombudsman becomes available",
+    what:
+      "The RBI ombudsman scheme will not look at a complaint until the bank has had thirty days and has either replied unsatisfactorily or not replied at all. Before that it is rejected as premature.",
+    authority: "RBI Integrated Ombudsman Scheme, 2021",
+    ifMissed:
+      "File at cms.rbi.org.in. It is free, it is online, and the bank has to answer on record.",
+  },
+];
+
+export function statutoryStatus(daysElapsed: number) {
+  return STATUTORY.map((s) => ({
+    ...s,
+    state:
+      daysElapsed > s.day ? ("passed" as const)
+      : daysElapsed === s.day ? ("today" as const)
+      : ("ahead" as const),
+    daysAway: s.day - daysElapsed,
+  }));
+}
+
+/* ------------------------------------------------------------------ */
+/* What the portal status actually means                               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The single most misread word in Indian cyber-fraud reporting is "Disposed".
+ * People read it as "resolved" and stop chasing. It means the opposite of that:
+ * the central desk has handed the file on and closed its own ticket.
+ */
+export interface StatusMeaning {
+  label: string;
+  reads: string;
+  means: string;
+  doNow: string;
+  good: boolean;
+}
+
+export const PORTAL_STATUS: StatusMeaning[] = [
+  {
+    label: "Disposed",
+    reads: "Sounds like: settled, finished, resolved.",
+    means:
+      "The complaint was forwarded to a police unit or a bank nodal desk and the central portal closed its own tracking entry. Nothing about your money has been decided.",
+    doNow:
+      "Find out which unit it went to and get a name. Disposed is the point to start chasing, not to stop.",
+    good: false,
+  },
+  {
+    label: "Under process at LEA",
+    reads: "Sounds like: somebody is working on it.",
+    means:
+      "It is sitting with a law enforcement agency. This is the honest status and it can stay this way for months without anything happening.",
+    doNow:
+      "Ask for the investigating officer's name and the FIR number in writing. An unanswered written request is itself useful later.",
+    good: true,
+  },
+  {
+    label: "Lien marked on beneficiary account",
+    reads: "Sounds like: you are getting your money back.",
+    means:
+      "The receiving bank has frozen what was left. That is genuinely good news, and it is still not your money. Release generally needs an order.",
+    doNow:
+      "Get the lien reference and the amount held in writing, then ask what the release process is in your jurisdiction.",
+    good: true,
+  },
+  {
+    label: "Closed",
+    reads: "Sounds like: the case is over and you lost.",
+    means:
+      "Often means closed on that portal only. A closure without a stated reason is not the same as an investigation concluding.",
+    doNow:
+      "Ask for the closure reason in writing. A ten rupee RTI gets it if the request does not.",
+    good: false,
+  },
+  {
+    label: "No action taken / blank",
+    reads: "Sounds like: nothing happened.",
+    means:
+      "Frequently accurate. It is also the status most likely to change after one written, dated follow-up naming a section.",
+    doNow: "Escalate on the statutory clock above rather than by calling again.",
+    good: false,
+  },
+];

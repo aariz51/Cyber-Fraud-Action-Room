@@ -37,6 +37,12 @@ export default function Home() {
               Golden Hour works the first hour for one and the freeze for the other, and
               names the four missing fields that cause both.
             </p>
+            <p className="mt-5 max-w-[39rem] border-l-2 border-[var(--accent)] pl-4 text-[0.94rem] leading-7 text-[var(--ink-2)]">
+              <strong className="text-[var(--ink)]">Not a replacement for NCRP.</strong> Four
+              fields added to the freeze instruction that already travels, and one grievance
+              door for the account holder. No new portal, no new identity system, no
+              amendment to the BNSS.
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/action-room/frozen" className="btn btn-primary px-5 py-3.5 text-sm">My account is frozen <ArrowRight size={17} weight="bold" /></Link>
               <a href="tel:1930" className="btn btn-emergency px-5 py-3.5 text-sm"><PhoneCall size={17} weight="fill" />Money just moved &mdash; call 1930</a>
