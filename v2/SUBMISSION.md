@@ -3,6 +3,8 @@
 Live: **https://golden-hour-rust-mu.vercel.app**
 Repo: **github.com/aariz51/Cyber-Fraud-Action-Room**
 Demo video: **https://youtu.be/6FrDbfivus4** (unlisted, anyone with the link can watch)
+Proposal page: **https://golden-hour-rust-mu.vercel.app/proposal** (the four missing fields)
+250-word summary: see `~/buildwhatmovesindia-research/SUMMARIES-250-WORDS.md`
 
 Deadline: 28 August 2026, 8:00 PM IST. No grace period.
 

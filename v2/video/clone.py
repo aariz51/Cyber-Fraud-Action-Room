@@ -65,22 +65,44 @@ def speakable(text: str) -> str:
 # The script
 # --------------------------------------------------------------------------
 TAKES: dict[int, str] = {
-    1: "In Indian cyber fraud, the first hour decides whether you get your money back. Report within minutes and there is a sixty percent chance it can still be frozen. After a week, five percent. Nothing tells you that at the time.",
+    1: "Every cyber fraud has two victims. One is robbed. "
+       "The other received the money, had no idea it was stolen, "
+       "and wakes up to their entire balance frozen over a few hundred rupees.",
 
-    2: "So this is one door, and then a focused workspace. Money just moved. My account is frozen. Or I need to organise my case. Nothing urgent is buried in a landing page.",
+    2: "That second person has committed no offence. "
+       "They are not a complainant. They are not an accused. "
+       "No portal has a category for them, so they get no door at all.",
 
-    3: "Four questions build a local case. How much, how it left, when, and the one nobody asks. Did you approve the payment? That answer decides which law protects you.",
+    3: "Golden Hour gives them one. A few questions about the freeze, "
+       "and it works out where they actually stand.",
 
-    4: "Now the clock is running. Fifty seven percent, and falling every minute you read this. The actions are ordered by how much money each one recovers, so calling 1930 comes first, with a script.",
+    4: "Here the account holds eighteen lakh sixty thousand rupees. "
+       "The disputed credit is one hundred and seventy five rupees. "
+       "That is ten thousand six hundred and twenty nine rupees locked "
+       "for every rupee actually in question.",
 
-    5: "This is the money trail. Your money fans out through intermediary accounts within minutes. Layer one is the only layer banks reliably catch, which is what makes speed mean something.",
+    5: "It cites the real law, and the law disagrees with itself. "
+       "Bombay and Delhi hold that police cannot debit freeze. "
+       "Karnataka holds they can. So the advice changes with the state.",
 
-    6: "Here an OpenAI model does exactly one job. It turns a panicking person's rough account into the factual chronology a police officer can act on. Everything else on this site stays deterministic.",
+    6: "Then it drafts the letter to the bank and the ten rupee RTI, "
+       "and unlocks each next step only on the day it becomes admissible.",
 
-    7: "A second path, for the other victim of the same money trail. One tainted rupee freezes an entire account. A hundred and seventy five rupees disputed, eighteen lakh held. We test that freeze against real law.",
+    7: "The first victim still gets the first hour. A live recovery clock "
+       "against their own incident time, and the actions ordered by how much "
+       "each one actually recovers, so calling nineteen thirty leads, "
+       "with a script, because people go blank on the phone.",
 
-    8: "Real workflow, synthetic case data. It connects to no bank, no police system, no CFCFRMS. Every figure carries its source, and the one thing a prototype cannot have is the write that actually moves money.",
+    8: "On the build. An OpenAI model does exactly one job here. "
+       "It turns a panicking person's story into the chronology "
+       "an officer can act on. Every legal test is deterministic, "
+       "because someone deciding what to do in ten minutes deserves "
+       "the same answer every time they ask.",
 
+    9: "Both problems have one cause. The freeze instruction that reaches a bank "
+       "never carries the disputed amount, so the bank freezes everything. "
+       "We wrote out the four fields that would end it, and none of them "
+       "need a new system. Every case here is synthetic.",
 }
 
 

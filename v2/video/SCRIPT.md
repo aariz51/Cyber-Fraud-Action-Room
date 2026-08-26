@@ -1,46 +1,39 @@
-# Golden Hour V2 - voiceover script
+# Golden Hour - two minute film
 
-8 takes. Each one describes exactly what is on screen while it is spoken.
-Around 100 seconds total, inside the two minute cap.
+Eight takes, narrated in Aariz's cloned voice, over eight screen segments
+recorded from the live deployment. Minute one is the citizen demo, minute two
+is how it was built and why.
 
-Pronunciation: **1930** is "nineteen thirty". **CFCFRMS** is spelled out.
+The frozen account leads, because that is the victim nobody else builds for.
 
-### Take 1  (~13s)  - home hero
-> In Indian cyber fraud, the first hour decides whether you get your money back.
-> Report within minutes and there is a sixty percent chance it can still be
-> frozen. After a week, five percent. Nothing tells you that at the time.
+## Take 1
 
-### Take 2  (~12s)  - one door, then a workspace
-> So this is one door, and then a focused workspace. Money just moved. My
-> account is frozen. Or I need to organise my case. Nothing urgent is buried in
-> a landing page.
+Every cyber fraud has two victims. One is robbed. The other received the money, had no idea it was stolen, and wakes up to their entire balance frozen over a few hundred rupees.
 
-### Take 3  (~12s)  - four question triage
-> Four questions build a local case. How much, how it left, when, and the one
-> nobody asks. Did you approve the payment? That answer decides which law
-> protects you.
+## Take 2
 
-### Take 4  (~13s)  - the clock
-> Now the clock is running. Fifty seven percent, and falling every minute you
-> read this. The actions are ordered by how much money each one recovers, so
-> calling 1930 comes first, with a script.
+That second person has committed no offence. They are not a complainant. They are not an accused. No portal has a category for them, so they get no door at all.
 
-### Take 5  (~12s)  - money trail
-> This is the money trail. Your money fans out through intermediary accounts
-> within minutes. Layer one is the only layer banks reliably catch, which is
-> what makes speed mean something.
+## Take 3
 
-### Take 6  (~13s)  - complaint draft
-> Here an OpenAI model does exactly one job. It turns a panicking person's
-> rough account into the factual chronology a police officer can act on.
-> Everything else on this site stays deterministic.
+Golden Hour gives them one. A few questions about the freeze, and it works out where they actually stand.
 
-### Take 7  (~13s)  - frozen account
-> A second path, for the other victim of the same money trail. One tainted
-> rupee freezes an entire account. A hundred and seventy five rupees disputed,
-> eighteen lakh held. We test that freeze against real law.
+## Take 4
 
-### Take 8  (~13s)  - honesty
-> Real workflow, synthetic case data. It connects to no bank, no police system,
-> no C F C F R M S. Every figure carries its source, and the one thing a
-> prototype cannot have is the write that actually moves money.
+Here the account holds eighteen lakh sixty thousand rupees. The disputed credit is one hundred and seventy five rupees. That is ten thousand six hundred and twenty nine rupees locked for every rupee actually in question.
+
+## Take 5
+
+It cites the real law, and the law disagrees with itself. Bombay and Delhi hold that police cannot debit freeze. Karnataka holds they can. So the advice changes with the state.
+
+## Take 6
+
+Then it drafts the letter to the bank and the ten rupee RTI, and unlocks each next step only on the day it becomes admissible.
+
+## Take 7
+
+The first victim still gets the first hour. A live recovery clock, and an OpenAI model doing exactly one job, turning a panicking story into a chronology an officer can act on. Every legal test is deterministic.
+
+## Take 8
+
+Both problems have one cause. The freeze instruction that reaches a bank never carries the disputed amount, so the bank freezes everything. We wrote out the four fields that would end it. Every case here is synthetic.
