@@ -93,16 +93,19 @@ TAKES: dict[int, str] = {
        "each one actually recovers, so calling nineteen thirty leads, "
        "with a script, because people go blank on the phone.",
 
-    8: "On the build. An OpenAI model does exactly one job here. "
-       "It turns a panicking person's story into the chronology "
-       "an officer can act on. Every legal test is deterministic, "
-       "because someone deciding what to do in ten minutes deserves "
-       "the same answer every time they ask.",
+    8: "There is a second clock, and nobody shows you this one either. "
+       "Rights expire on a schedule. Three days for zero liability. "
+       "Fourteen for a preliminary enquiry to become an F I R. "
+       "Thirty before the ombudsman will even look at you. "
+       "And the word people misread most is Disposed. It does not mean resolved. "
+       "It means the file was handed on and the ticket was closed.",
 
-    9: "Both problems have one cause. The freeze instruction that reaches a bank "
-       "never carries the disputed amount, so the bank freezes everything. "
-       "We wrote out the four fields that would end it, and none of them "
-       "need a new system. Every case here is synthetic.",
+    9: "Freezing is also not the same as getting paid. Of about fifty three thousand "
+       "crore reported stolen, roughly seven thousand six hundred crore was frozen, "
+       "and only about one hundred and sixty seven crore reached victims. "
+       "One OpenAI model does one job here, and every legal test is deterministic. "
+       "The four fields that would fix all of this are on the proposal page. "
+       "Every case here is synthetic.",
 }
 
 

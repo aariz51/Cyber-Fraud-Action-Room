@@ -204,34 +204,34 @@ const BEATS = {
     await sleep(secs * 1000 - 5600);
   },
 
-  // "on the build: the model does one job, everything else deterministic"
+  // "a second clock: rights expire on a schedule. and Disposed is not resolved."
   8: async (page, secs) => {
-    await page.goto(`${BASE}/action-room/complaint`, { waitUntil: 'networkidle' });
-    await sleep(800);
-    await page.locator('#narrative').fill(
-      'A man called saying he was from the electricity board and my connection would be cut in one hour. He sent a link to pay 10 rupees to verify. After I paid, 50000 went out in three transfers.'
-    );
-    await sleep(700);
-    await page.getByRole('button', { name: /Write my complaint|Rewrite/ }).click();
-    await page.waitForSelector('text=Written by an OpenAI model', { timeout: 30000 }).catch(() => {});
-    await sleep(900);
+    await page.goto(`${BASE}/action-room/recovery`, { waitUntil: 'networkidle' });
+    await sleep(1200);
     await page.evaluate(() => {
-      const ta = [...document.querySelectorAll('textarea')].find((t) =>
-        t.getAttribute('aria-label')?.includes('complaint draft')
-      );
-      ta?.scrollIntoView({ block: 'center' });
+      const h = [...document.querySelectorAll('h2')].find((e) => /Deadlines that expire/i.test(e.textContent || ''));
+      if (h) h.scrollIntoView({ block: 'start' });
     });
-    await sleep(secs * 1000 - 5000);
+    await sleep(4200);                 // day 3 / 14 / 30, passed and pending
+    await page.evaluate(() => {
+      const h = [...document.querySelectorAll('h2')].find((e) => /portal word actually means/i.test(e.textContent || ''));
+      if (h) h.scrollIntoView({ block: 'start' });
+    });
+    await sleep(secs * 1000 - 5400);   // sit on Disposed
   },
 
-  // "four fields, none of them need a new system. all synthetic."
+  // "frozen is not paid. one model, one job. four fields. all synthetic."
   9: async (page, secs) => {
+    await page.goto(`${BASE}/methodology`, { waitUntil: 'networkidle' });
+    await dropBanner(page);
+    await page.reload({ waitUntil: 'networkidle' });
+    await sleep(3000);                 // the sourced figures
+    await glide(page, 520, 2600);
+    await sleep(1800);
     await page.goto(`${BASE}/proposal`, { waitUntil: 'networkidle' });
-    await sleep(2600);
-    await glide(page, 700, 3000);
-    await sleep(1600);
-    await glide(page, 1600, 2800);
-    await sleep(secs * 1000 - 10600);
+    await sleep(2200);
+    await glide(page, 2400, 3000);     // down to the model table
+    await sleep(secs * 1000 - 12600);
   },
 };
 
