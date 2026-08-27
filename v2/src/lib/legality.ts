@@ -68,6 +68,16 @@ export interface FreezeStep {
   cost: string;
 }
 
+/**
+ * The version of the legal rule set that produced a verdict.
+ *
+ * The law here is actively moving: the High Courts disagree and any of them
+ * could be overruled. A verdict without a version is a verdict a person cannot
+ * check next month. Bump both when a holding changes.
+ */
+export const LEGAL_RULESET_VERSION = "v2026.08.2";
+export const LEGAL_RULESET_REVIEWED = "2026-08-26";
+
 export interface LegalityResult {
   strength: Strength;
   headline: string;
@@ -79,6 +89,16 @@ export interface LegalityResult {
   disproportionateAmount: number | null;
   proportionality: Proportionality | null;
   ladder: FreezeStep[];
+  ruleSetVersion: string;
+  ruleSetReviewed: string;
+  /**
+   * The argument that looks strongest and is not.
+   *
+   * People lead with whichever ground sounds most dramatic, and in the wrong
+   * state that is exactly the ground that loses. Naming what NOT to lead with is
+   * worth as much as naming the winner.
+   */
+  doNotLeadWith: { argument: string; why: string } | null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -383,7 +403,39 @@ export function assessFreeze(facts: FreezeFacts): LegalityResult {
     disproportionateAmount,
     proportionality: proportionalityOf(facts),
     ladder: ladderFor(facts, strength),
+    ruleSetVersion: LEGAL_RULESET_VERSION,
+    ruleSetReviewed: LEGAL_RULESET_REVIEWED,
+    doNotLeadWith: redHerringFor(jx, facts),
   };
+}
+
+/* ------------------------------------------------------------------ */
+/* What not to lead with                                               */
+/* ------------------------------------------------------------------ */
+
+function redHerringFor(jx: Jurisdiction, facts: FreezeFacts) {
+  if (jx.key === "karnataka") {
+    return {
+      argument: "That the police had no power to freeze at all",
+      why:
+        "It is the argument that sounds strongest and it is the one that loses here. Karnataka has upheld a debit freeze under section 106 without prior court permission. Leading with it hands the other side an easy answer. Lead with proportionality and the missing notice instead.",
+    };
+  }
+  if (facts.scope === "disputed") {
+    return {
+      argument: "Proportionality",
+      why:
+        "Only the disputed amount is held, so the proportionality argument that works in most of these cases does not apply to yours. Your ground is the section relied on and whether the Magistrate was ever told.",
+    };
+  }
+  if (facts.section === "107") {
+    return {
+      argument: "That a Magistrate was never involved",
+      why:
+        "Section 107 attachment is ordered by a Magistrate, so that box is already ticked. Do not spend the letter on it. Ask instead whether the amount attached matches the amount actually in dispute.",
+    };
+  }
+  return null;
 }
 
 /* ------------------------------------------------------------------ */

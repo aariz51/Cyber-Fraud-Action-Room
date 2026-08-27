@@ -190,6 +190,21 @@ export function FreezeResult({
             )}
           </section>
 
+          {result.doNotLeadWith && (
+            <section className="panel p-5 sm:p-6" style={{ borderStyle: "dashed" }}>
+              <div className="flex items-center gap-2">
+                <Warning size={16} weight="fill" style={{ color: "var(--ink-3)" }} />
+                <h2 className="text-[15px] font-semibold tracking-tight">Do not lead with this</h2>
+              </div>
+              <p className="mt-3 text-[14.5px] font-medium leading-snug">
+                {result.doNotLeadWith.argument}
+              </p>
+              <p className="mt-2 text-[13.5px] leading-relaxed" style={{ color: "var(--ink-2)" }}>
+                {result.doNotLeadWith.why}
+              </p>
+            </section>
+          )}
+
           <section className="panel p-5 sm:p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h2 className="text-[15px] font-semibold tracking-tight">What to do, in order</h2>
@@ -248,9 +263,14 @@ export function FreezeResult({
           </section>
 
           <section className="panel p-5 sm:p-6">
-            <h2 className="text-[15px] font-semibold tracking-tight">
-              The law this rests on
-            </h2>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h2 className="text-[15px] font-semibold tracking-tight">
+                The law this rests on
+              </h2>
+              <p className="num text-[11.5px]" style={{ color: "var(--ink-4)" }}>
+                rule set {result.ruleSetVersion} &middot; reviewed {result.ruleSetReviewed}
+              </p>
+            </div>
             <ul className="mt-4 space-y-4">
               {result.citations.map((c, i) => (
                 <li

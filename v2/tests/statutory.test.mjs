@@ -8,7 +8,9 @@ import { readFileSync } from 'node:fs';
 
 // The lib is TypeScript; parse the exported data out of it rather than
 // standing up a transpiler for three pure-data structures.
-const src = readFileSync(new URL('../src/lib/case.ts', import.meta.url), 'utf8');
+const src =
+  readFileSync(new URL('../src/lib/case.ts', import.meta.url), 'utf8') +
+  readFileSync(new URL('../src/lib/legality.ts', import.meta.url), 'utf8');
 
 test('every statutory deadline cites an authority with a section or circular', () => {
   const auths = [...src.matchAll(/authority:\s*\n?\s*"([^"]+)"/g)].map((m) => m[1]);
@@ -56,4 +58,25 @@ test('every decoded status tells the reader what to do next', () => {
 test('no generated legal text contains an em dash', () => {
   const i = src.indexOf('export const STATUTORY');
   assert.ok(!src.slice(i).includes('—'), 'em dash found in statutory block');
+});
+
+test('the legal rule set is versioned and dated', () => {
+  assert.match(src, /LEGAL_RULESET_VERSION = "v\d{4}\.\d{2}\.\d+"/);
+  assert.match(src, /LEGAL_RULESET_REVIEWED = "\d{4}-\d{2}-\d{2}"/);
+});
+
+test('Karnataka is told NOT to lead with the no-power argument', () => {
+  const i = src.indexOf('function redHerringFor');
+  assert.ok(i > 0, 'redHerringFor missing');
+  const block = src.slice(i, i + 1400);
+  assert.match(block, /karnataka/);
+  assert.match(block, /had no power to freeze at all/);
+  assert.match(block, /Lead with proportionality/);
+});
+
+test('the red herring covers the disputed-scope and s.107 cases too', () => {
+  const i = src.indexOf('function redHerringFor');
+  const block = src.slice(i, i + 1800);
+  assert.match(block, /scope === "disputed"/);
+  assert.match(block, /section === "107"/);
 });
