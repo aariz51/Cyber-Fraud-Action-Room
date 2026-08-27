@@ -640,3 +640,8 @@ body:has(.app-shell) {
     border-radius: 1.35rem;
   }
 }
+/* voice intake */
+.voice-intake { margin-bottom: 4px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); }
+.voice-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--crit); animation: voicePulse 1.1s ease-in-out infinite; }
+@keyframes voicePulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
+@media (prefers-reduced-motion: reduce) { .voice-dot { animation: none; } }

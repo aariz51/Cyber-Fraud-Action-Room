@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { VoiceIntake, type Heard } from "./VoiceIntake";
 import { Copy, Check, Sparkle, ArrowClockwise, Warning } from "@phosphor-icons/react";
 import type { CaseState } from "@/lib/store";
 
@@ -69,9 +70,18 @@ export function ComplaintDraft({
 
   return (
     <div>
+      <VoiceIntake
+        onHeard={(h: Heard) => {
+          // Voice fills the narrative. It never overwrites what someone typed;
+          // it appends, because a person who typed then spoke meant to add.
+          const existing = kase.narrative?.trim();
+          onNarrative(existing ? `${existing}\n\n${h.transcript}` : h.transcript);
+        }}
+      />
+
       <label
         htmlFor="narrative"
-        className="block text-sm font-medium"
+        className="mt-5 block text-sm font-medium"
         style={{ color: "var(--ink-2)" }}
       >
         Tell us what happened, in any order
