@@ -36,7 +36,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://golden-hour-action-room.vercel.app"),
+  metadataBase: new URL("https://golden-hour-rust-mu.vercel.app"),
   title: {
     default: "Golden Hour — Cyber Fraud Action Room",
     template: "%s — Golden Hour",
@@ -47,14 +47,23 @@ export const metadata: Metadata = {
     title: "Golden Hour — Cyber Fraud Action Room",
     description:
       "Every cyber fraud has two victims. The second one has no door. A private, device-local hackathon prototype.",
-    images: [{ url: "/assets/golden-hour-north-star.png", width: 1536, height: 1024 }],
+    type: "website",
+    siteName: "Golden Hour",
+    locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
     title: "Golden Hour — Cyber Fraud Action Room",
     description: "A calm command room for the first hours after cyber fraud.",
-    images: ["/assets/golden-hour-north-star.png"],
   },
+  applicationName: "Golden Hour",
+  authors: [{ name: "Aariz" }],
+  keywords: [
+    "cyber fraud", "account frozen", "lien marked", "NCRP complaint", "1930 helpline",
+    "CFCFRMS", "unfreeze bank account", "cyber crime India", "second victim",
+  ],
+  robots: { index: true, follow: true },
+  category: "civic technology",
 };
 
 export const viewport: Viewport = {

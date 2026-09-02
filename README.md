@@ -4,6 +4,8 @@
 
 **An independent hackathon prototype. Not a government service, not affiliated with I4C, MHA, the NCRP or any bank. Every case, name and number in it is synthetic.**
 
+Live: https://golden-hour-rust-mu.vercel.app
+
 ---
 
 > In Indian cyber fraud, the outcome is decided in the first hour. Nothing in the
@@ -114,6 +116,46 @@ prototype does not need any of them.
 
 Next.js 16 App Router, React 19, TypeScript, Tailwind v4, Phosphor icons.
 No database. State is `useSyncExternalStore` over `localStorage`.
+
+The shipped app is in `v2/`. The earlier build is kept in `src/` for reference.
+
+## How the model is used
+
+Built with Codex throughout. At runtime an OpenAI model does exactly one job: it
+turns the victim's rough notes into a factual complaint chronology.
+
+It is never allowed to invent an identifier, decide legal entitlement, or set the
+order of actions. Those come from a deterministic rule set, so the same facts
+always produce the same guidance and the same statutory deadlines. The app runs
+without an API key by falling back to that deterministic path, and labels on
+screen which of the two produced the answer.
+
+## Running it
+
+```bash
+cd v2
+npm install
+npm run dev
+```
+
+The complaint drafter needs an OpenAI key. Everything else, including the
+Recovery Clock, the Layer Map and the freeze legality engine, runs without one.
+
+```bash
+OPENAI_API_KEY=sk-...
+```
+
+## Tests
+
+```bash
+cd v2
+node tests/statutory.test.mjs    # the statutory deadline ladder
+node tests/audit.mjs             # 40 content and disclosure checks
+```
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
 
 ## If money has actually left your account
 

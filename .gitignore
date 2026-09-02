@@ -59,3 +59,10 @@ v2/video/vo/
 v2/video/.rawvideo/
 v2/video/*.wav
 v2/video/.work/
+
+# The voice reference recording used for the demo narration must never be
+# committed: a public copy would let anyone clone the voice. The finished demo
+# videos are already tracked and are published on YouTube anyway.
+*.wav
+video/segments/
+video/vo/
